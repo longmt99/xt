@@ -28,36 +28,36 @@ public class App {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws Exception {
 		System.out.println("==============================================================================");
-		System.out.println("||                              PHÂN TÍCH DỮ LIỆU XT                        ||");
-		System.out.println("||                                       + Tổng hợp dữ liệu output          ||");
-		System.out.println("||                                       + Phân tích chuỗi XT theo input    ||");
+		System.out.println("||                              PHAN TICH DU LIEU XT                        ||");
+		System.out.println("||                                       + Tong hop du lieu output          ||");
+		System.out.println("||                                       + Phan tich chuoi XT theo input    ||");
 		System.out.println("==============================================================================");
 		System.out.println("||            1.0+ $java -jar xt.jar                                        ||");
 		System.out.println("||            2.1+ $java -jar xt.jar XXXX                                   ||");
 		System.out.println("||            2.2+ $java -jar xt.jar XXXX 65                                ||");
 		System.out.println("==============================================================================\n");
 		loadConfig();
-		System.out.println("1. Nạp cấu hình config ");
+		System.out.println("1. Nap cau hinh config ");
 		if(args.length>=1){
 			size = args[0].length();
 		}
 		if(args.length==2){
 			rate = Integer.parseInt(args[1]);
 		}
-		System.out.println("\n    ĐỘ DÀI CHUỖI = [" + size + "]\n    TỈ LỆ CHẤP NHẬN = [" + rate + "]");
+		System.out.println("\n    DO DAI CHUOI = [" + size + "]\n    TI LE CHAP NHAN = [" + rate + "]");
 
 		buffer = "";
 		List<String> list = listData(new File(INPUT));
-		System.out.println("\n2. Dữ liệu đầu vào input data " + list + "");
+		System.out.println("\n2. Du lieu dau vao input data " + list + "");
 		for (String name : list) {
 			buffer += readFile(INPUT + File.separator + name);
 		}
 		buffer = StringUtils.escape(buffer);
-		System.out.println("\n3. Chuỗi dữ liệu sẽ chạy");
+		System.out.println("\n3. Chuoi du lieu se chay");
 		System.out.println("  ===== " + buffer);
 		int start = 0;
 		int end = 0;
-		System.out.println("\n4. Bắt đầu chạy dữ liệu ");
+		System.out.println("\n4. Bat dau chay du lieu ");
 		if (args.length < 1) {
 			while (end <= buffer.length() - 2) {
 				end = start + size - 1;
@@ -67,21 +67,21 @@ public class App {
 					++start;
 					continue;
 				}
-				System.out.println("\n  ===== Chuỗi thử ban đầu: " + feed);
+				System.out.println("\n  ===== Chuoi thu ban dau: " + feed);
 				Rate result = findString(feed);
 				if (result != null) {
 					output.put(result.getFeed(), result);
 				}
 				++start;
 			}
-			System.out.println("\n5. Lọc kết quả dữ liệu OUTPUT data " + OUTPUT);
+			System.out.println("\n5. Loc ket qua du lieu OUTPUT data " + OUTPUT);
 			storeOutput();
 		} else {
 			String feed = args[0];
-			System.out.println("\n  ===== Chuỗi thử ban đầu: " + feed);
+			System.out.println("\n  ===== Chuoi thu ban dau: " + feed);
 			Rate result = findString(feed);
-			System.out.println("\n5. Phân tích chuỗi XT theo input " + feed);
-			System.out.println("     Kết quả ");
+			System.out.println("\n5. Phan tich chuoi XT theo input " + feed);
+			System.out.println("     Ket qua ");
 			if (result!=null && (result.getXrate() >= rate || result.getTrate() >= rate)) {
 				System.out.print("     " + result);
 			}
@@ -127,18 +127,18 @@ public class App {
 		int xCount = StringUtils.countMatches(buffer, feedX);
 		int tCount = StringUtils.countMatches(buffer, feedT);
 		if (xCount == 0) {
-			System.out.println("     Dữ liệu không đủ so sánh " + feedX + "(" + xCount + ")");
+			System.out.println("     Du lieu khong du so sanh " + feedX + "(" + xCount + ")");
 			return result;
 		}
 		if (tCount == 0) {
-			System.out.println("      Dữ liệu không đủ so sánh " + feedT + "(" + tCount + ")");
+			System.out.println("      Du lieu khong du so sanh " + feedT + "(" + tCount + ")");
 			return result;
 		}
 		int total = xCount + tCount;
 		int xRate = xCount * 100 / total;
 		int tRate = tCount * 100 / total;
 		result = new Rate(feed, xCount, tCount, xRate, tRate);
-		System.out.println("     Kết quả tìm chuỗi: " + result);
+		System.out.println("     Ket qua tim chuoi: " + result);
 		return result;
 
 	}

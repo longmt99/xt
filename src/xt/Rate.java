@@ -20,10 +20,10 @@ public class Rate {
 	}
 	
 	public String toString() {
-		return "Chuỗi thử ban đầu [" + feed + 
-				"]\n     Chuỗi kết quả X-T tương ứng {" + feed + "X - " + feed + "T}\n"
-				 + "     Số lần xuất hiện [" + xcount + " - " + tcount + "]\n" 
-				 + "     Tỉ lệ  [" + xrate + " - "		+ trate + "]\n";
+		return "Chuoi thu ban dau [" + feed + 
+				"]\n     Chuoi ket qua X-T tuong ung {" + feed + "X - " + feed + "T}\n"
+				 + "     So lan xuat hien [" + xcount + " - " + tcount + "]\n" 
+				 + "     Tỉ le  [" + xrate + " - "		+ trate + "]\n";
 	}	
 	public String toOuput() {
 		return "Input " + feed + " ---> {" + feed + "X - " + feed + "T} --> [" + xcount + " - " + tcount + "] --> [" + xrate + " - "		+ trate + "]";
