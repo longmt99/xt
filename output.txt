@@ -1,3 +1,0 @@
-#Thu May 10 17:19:16 ICT 2018
-2=Input TTTT ---> {TTTTX - TTTTT} --> [1 - 3] --> [25 - 75]
-1=Input XTXT ---> {XTXTX - XTXTT} --> [3 - 1] --> [75 - 25]
