@@ -24,7 +24,8 @@ public class App {
 	private static final String CONFIG = "config.txt";
 	private static final String OUTPUT = "output.json";
 	private static int size = 14;
-	private static int rate = 80;
+	private static int rate = 70;
+	private static int sample = 8;
 	private static String buffer = "";
 	private static Map<String, Rate> output = new HashMap<String, Rate>();
 
@@ -174,7 +175,6 @@ public class App {
 		generalObj.put("input-51", "10");
 		generalObj.put("input-52", "0-0");
 		generalObj.put("loaiCau", "11");
-		generalObj.
 		obj.put("general", generalObj);
 
 		JSONArray nangCao = new JSONArray();
@@ -219,15 +219,11 @@ public class App {
 		String feedT = feed + "T";
 		int xCount = StringUtils.countMatches(buffer, feedX);
 		int tCount = StringUtils.countMatches(buffer, feedT);
-		if (xCount == 0) {
-			System.out.println("     Du lieu khong du so sanh " + feedX + "(" + xCount + ")");
-			return result;
-		}
-		if (tCount == 0) {
-			System.out.println("      Du lieu khong du so sanh " + feedT + "(" + tCount + ")");
-			return result;
-		}
 		int total = xCount + tCount;
+		if (xCount < 2 || tCount < 2 || total < sample) {
+			System.out.println("      Du lieu khong du so sanh " + feedX + "(" + xCount + "), " + feedT + "("+ tCount + ")");
+			return result;
+		}
 		int xRate = xCount * 100 / total;
 		int tRate = tCount * 100 / total;
 		result = new Rate(feed, xCount, tCount, xRate, tRate);
@@ -244,6 +240,7 @@ public class App {
 			prop.load(input);
 			size = Integer.parseInt(prop.getProperty("size"));
 			rate = Integer.parseInt(prop.getProperty("rate"));
+			sample= Integer.parseInt(prop.getProperty("sample"));
 		} catch (Exception ex) {
 			System.out.println("Get DEFAULT config");
 		}

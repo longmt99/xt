@@ -1,2 +1,3 @@
 size=12
-rate=88
+rate=80
+sample=11
