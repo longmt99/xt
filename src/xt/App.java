@@ -26,6 +26,7 @@ public class App {
 	private static int size = 14;
 	private static int rate = 70;
 	private static int sample = 8;
+	private static int min = 2;
 	private static String buffer = "";
 	private static Map<String, Rate> output = new HashMap<String, Rate>();
 
@@ -220,7 +221,7 @@ public class App {
 		int xCount = StringUtils.countMatches(buffer, feedX);
 		int tCount = StringUtils.countMatches(buffer, feedT);
 		int total = xCount + tCount;
-		if (xCount < 2 || tCount < 2 || total < sample) {
+		if (xCount < min || tCount < min || total < sample) {
 			System.out.println("      Du lieu khong du so sanh " + feedX + "(" + xCount + "), " + feedT + "("+ tCount + ")");
 			return result;
 		}
@@ -240,6 +241,7 @@ public class App {
 			prop.load(input);
 			size = Integer.parseInt(prop.getProperty("size"));
 			rate = Integer.parseInt(prop.getProperty("rate"));
+			min=Integer.parseInt(prop.getProperty("min"));
 			sample= Integer.parseInt(prop.getProperty("sample"));
 		} catch (Exception ex) {
 			System.out.println("Get DEFAULT config");
