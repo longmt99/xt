@@ -174,7 +174,7 @@ public class App {
 		generalObj.put("input-51", "10");
 		generalObj.put("input-52", "0-0");
 		generalObj.put("loaiCau", "11");
-
+		generalObj.
 		obj.put("general", generalObj);
 
 		JSONArray nangCao = new JSONArray();
